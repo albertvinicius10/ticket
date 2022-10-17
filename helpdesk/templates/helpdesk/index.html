@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4 text-white">
+    <div class="row">
+        <div class="col-md-4 mt-4">
+            <a href="{% url 'add' %}" id="ab">
+            <div class="card">
+                <div class="card-body text-center bg-info">
+                    <h4>Abrir ticket</h4>
+                </div>
+            </div>
+            </a>
+        </div>
+        <div class="col-md-4 mt-4">
+            <div class="card">
+                <a href="{% url 'ticket' %}" id="ac">
+                <div class="card-body text-center bg-primary">
+                    <h4>Meus tickets</h4>
+                </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4 mt-4">
+            <div class="card">
+                <div class="card-body text-center bg-success">
+                    <h4>Fazendo</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 mt-4">
+            <div class="card">
+                <div class="card-body text-center bg-warning">
+                    <h4>Expirados</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-4">
+            <div class="card">
+                <div class="card-body text-center bg-danger">
+                    <h4>Pausado</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-4">
+            <div class="card">
+                <div class="card-body text-center bg-secondary">
+                    <h4>Finalizado</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+{% endblock %}

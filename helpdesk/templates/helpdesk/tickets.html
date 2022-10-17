@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Meus tickets{% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <table class="table bg-withe mt-4">
+                <thead class="bg-info text-white">
+                    <tr class="text-white">
+                        <td>Titulo</td>
+                        <td>Prioridade</td>
+                        <td>Descrição</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for ticket in tickets%}
+                    <tr>
+                        <td>{{ticket.titulo}}</td>
+                        <td>{{ticket.prioridade}}</td>
+                        <td>{{ticket.descricao}}</td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
