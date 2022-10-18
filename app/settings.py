@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'helpdesk',
     'crispy_forms',
+    'user'
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,11 @@ STATIC_ROOT = (BASE_DIR/"asert/")
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_ROOT = (BASE_DIR/ 'media')
+
+MEDIA_URL = '/media/'
+
+LOGIN_REDIRECT_URL = 'index'
+
+LOGIN_URL = 'user-login'

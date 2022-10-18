@@ -16,9 +16,10 @@
   </head>
   <body>
     <header>
+        {% if user.is_authenticated %}
         <nav class="navbar navbar-expand-sm navbar-dark bg-info py-3">
           <div class="container-fluid">
-            <a href="/" class="navbar-brand">
+            <a href="{% url 'index' %}" class="navbar-brand">
               <img src="https://crea-am.org.br/creaam_site/wp-content/uploads/logo-text-1.png" width="142" alt="">
             </a>
   
@@ -32,19 +33,41 @@
                   <a href="" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a href="" class="nav-link">Tickets</a>
+                  <a href="{% url 'ticket' %}" class="nav-link">Tickets</a>
                 </li>
                 <li class="nav-item">
                   <a href="" class="nav-link">Sobre</a>
                 </li>
                 <li class="nav-item">
-                  <a href="" class="btn btn-outline-light ml-4">Entrar</a>
+                  <a href="" class="nav-link">Sair</a>
                 </li>
+            
               </ul>
             </div>
           </div>
   
         </nav>
+        {% else %}
+        <nav class="navbar navbar-expand-sm navbar-dark bg-info py-3">
+          <div class="container-fluid">
+            <a href="{% url 'index' %}" class="navbar-brand">
+              <img src="https://crea-am.org.br/creaam_site/wp-content/uploads/logo-text-1.png" width="142" alt="">
+            </a>
+  
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-principal">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+  
+            <div class="collapse navbar-collapse" id="nav-principal">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a href="" class="nav-link">Home</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        {% endif %}
       </header>
       {% block content%}
       {% endblock %}

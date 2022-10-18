@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'partials/base.html' %}
 
 {% block title %}Meus tickets{% endblock %}
 {% block content %}
@@ -12,16 +12,22 @@
                         <td>Titulo</td>
                         <td>Prioridade</td>
                         <td>Descrição</td>
+                        <td>Created at</td>
+                        <td>Updated at</td>
+                        <td>User</td>
                     </tr>
                 </thead>
                 <tbody>
-                    {%for ticket in tickets%}
+                    {% for ticket in tickets %}
                     <tr>
                         <td>{{ticket.titulo}}</td>
                         <td>{{ticket.prioridade}}</td>
                         <td>{{ticket.descricao}}</td>
+                        <td>{{ticket.created_at}}</td>
+                        <td>{{ticket.updated_at}}</td>
+                        <td>{{ticket.staff}}</td>
                     </tr>
-                    {%endfor%}
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
