@@ -2,11 +2,17 @@
 
 {% block title %}Meus tickets{% endblock %}
 {% block content %}
-
-<div class="container">
+<div class="container mt-4 mb-2 d-flex flex-row justify-content-end">
     <div class="row">
         <div class="col">
-            <table class="table bg-withe mt-4">
+            <a class="btn btn-success" href="{% url 'add' %}">Criar Ticket</a>
+        </div>
+    </div>
+</div>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col">
+            <table class="table bg-withe mt-4 table-striped">
                 <thead class="bg-info text-white">
                     <tr class="text-white">
                         <td>Titulo</td>
@@ -15,6 +21,11 @@
                         <td>Created at</td>
                         <td>Updated at</td>
                         <td>User</td>
+                        <td>Status</td>
+                        <td></td>
+                        <td></td>
+
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -26,6 +37,10 @@
                         <td>{{ticket.created_at}}</td>
                         <td>{{ticket.updated_at}}</td>
                         <td>{{ticket.staff}}</td>
+                        <td>{{ticket.status}}</td>
+                        <td><a href="edit/{{task.id}}"><span><i class="fas fa-edit"></i></span></a></td>
+                        <td><a href="delete/{{task.id}}" class="delete-btn"><span><i class="fas fa-trash"></i></span></a></td>
+                        
                     </tr>
                     {% endfor %}
                 </tbody>

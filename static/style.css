@@ -10,3 +10,9 @@ footer p a {
 	text-decoration: none;
 	color: white;
 }
+.fas.fa-edit{
+    color: #13c43f;
+}
+.fas.fa-trash{
+    color: #db1e47;
+}

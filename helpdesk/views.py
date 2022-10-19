@@ -14,7 +14,10 @@ def add(request):
     if request.method=='POST':
         form = TicketForm(request.POST)
         if form.is_valid():
-            form.save()
+            instance = form.save(commit=False)
+            instance.status = 'Fazendo'
+            instance.staff = request.user
+            instance.save()
             return redirect('index')
     else:
         form = TicketForm()
@@ -23,10 +26,9 @@ def add(request):
 @login_required()
 def ticket(request):
     tickets= Ticket.objects.all()
-    tickets_user = User.objects.all()
+    #tickets= Ticket.objects.filter(staff=request.user)
     context = {
         'tickets': tickets,
-        'tickets_user':tickets_user,
-
     }
+
     return render(request, 'helpdesk/tickets.html', context)

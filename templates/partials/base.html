@@ -30,7 +30,7 @@
             <div class="collapse navbar-collapse" id="nav-principal">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                  <a href="" class="nav-link">Home</a>
+                  <a href="{% url 'index' %}" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
                   <a href="{% url 'ticket' %}" class="nav-link">Tickets</a>
@@ -39,7 +39,7 @@
                   <a href="" class="nav-link">Sobre</a>
                 </li>
                 <li class="nav-item">
-                  <a href="" class="nav-link">Sair</a>
+                  <a href="{% url 'user-logout' %}" class="nav-link">Sair</a>
                 </li>
             
               </ul>

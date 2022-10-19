@@ -4,11 +4,23 @@ from django.contrib.auth.models import User
 
 
 CATEGORY = (
-    ('Alta', 'Alta'),
     ('Baixa', 'Baixa'),
     ('Moderada', 'Moderada'),
+    ('Alta', 'Alta'),
+    ('Crítica', 'Crítica'),
 )
 
+STATUS = (
+    ('Fazendo', 'Fazendo'),
+    ('Feito', 'Feito'),
+)
+
+OCORRENCIA = (
+    ('Suporte Técnico Desktop - No Local', 'Suporte Técnico Desktop - No Local'),
+    ('Suporte Técnico Desktop - Remoto', 'Suporte Técnico Desktop - Remoto'),
+    ('Configuração de email', 'Configuração de email'),
+    ('Suporte/Manutenção de Notebook', 'Suporte/Manutenção de Notebook'),
+)
 
 class Ticket(models.Model):
     staff = models.ForeignKey(User, models.CASCADE, null= True)
@@ -17,9 +29,12 @@ class Ticket(models.Model):
     descricao = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    status = models.CharField(max_length=7, choices=STATUS,default='Fazendo')
+    tipo = models.CharField(max_length=50, choices=OCORRENCIA, null=True)
+    image = models.ImageField(upload_to='ocorrencia', null=True, blank=True)
 
     class Meta:
         verbose_name_plural = 'ticket'
 
     def __str__(self):
-        return f'{self.titulo} ordered by {self.staff.username}'
+        return f'{self.titulo} ordered by {self.staff}'
