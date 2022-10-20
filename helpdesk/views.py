@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages 
-from .models import Ticket
+from .models import Ticket, Room
 from .forms import TicketForm
 # Create your views here.
 @login_required()
@@ -32,3 +32,49 @@ def ticket(request):
     }
 
     return render(request, 'helpdesk/tickets.html', context)
+
+@login_required()
+def fazendo(request):
+    tickets = Ticket.objects.filter(status='Fazendo')
+    context = {
+        'tickets': tickets,
+    }
+    return render(request, 'helpdesk/fazendo.html', context)
+
+@login_required()
+def finalizado(request):
+    tickets = Ticket.objects.filter(status='Feito')
+    context = {
+        'tickets': tickets,
+    }
+    return render(request, 'helpdesk/finalizado.html', context)
+
+@login_required()
+def expirado(request):
+    tickets = Ticket.objects.filter(status='Expirado')
+    context = {
+        'tickets': tickets,
+    }
+    return render(request, 'helpdesk/finalizado.html', context)
+
+@login_required()
+def pausado(request):
+    tickets = Ticket.objects.filter(status='Pausado')
+    context = {
+        'tickets': tickets,
+    }
+    return render(request, 'helpdesk/finalizado.html', context)
+
+@login_required()
+def rooms(request):
+    rooms = Room.objects.all()
+
+    return render(request, 'room/rooms.html', {'rooms': rooms})
+
+@login_required()
+
+def room(request, slug):
+    room = Room.objects.get(slug=slug)
+
+
+    return render(request, 'room/room.html', {'room': room})

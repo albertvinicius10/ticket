@@ -1,0 +1,21 @@
+{% extends 'partials/base.html' %}
+
+{% block title %}Rooms{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col mt-4">
+            {% for room in rooms %}
+            <div class="card-deck">
+                <div class="card">
+                    <div class="card-body text-center bg-info">
+                        <h2>{{room.name}}</h2>
+                        <a class="btn btn-primary" href="{% url 'room' }room.slug %"></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{%endblock %}

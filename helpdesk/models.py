@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime
 # Create your models here.
 
 
@@ -13,6 +14,8 @@ CATEGORY = (
 STATUS = (
     ('Fazendo', 'Fazendo'),
     ('Feito', 'Feito'),
+    ('Expirado', 'Expirado'),
+    ('Pausado', 'Pausado'),
 )
 
 OCORRENCIA = (
@@ -29,7 +32,7 @@ class Ticket(models.Model):
     descricao = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=7, choices=STATUS,default='Fazendo')
+    status = models.CharField(max_length=8, choices=STATUS,default='Fazendo')
     tipo = models.CharField(max_length=50, choices=OCORRENCIA, null=True)
     image = models.ImageField(upload_to='ocorrencia', null=True, blank=True)
 
@@ -38,3 +41,7 @@ class Ticket(models.Model):
 
     def __str__(self):
         return f'{self.titulo} ordered by {self.staff}'
+    
+class Room(models.Model):
+    name = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True)

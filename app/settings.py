@@ -37,9 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
     'helpdesk',
     'crispy_forms',
-    'user'
+    'user',
+    
 ]
 
 MIDDLEWARE = [
@@ -71,7 +73,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'app.wsgi.application'
+ASGI_APPLICATION = 'app.asgi.application'
 
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer'
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -134,5 +143,6 @@ MEDIA_ROOT = (BASE_DIR/ 'media')
 MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = '/'
 
 LOGIN_URL = 'user-login'

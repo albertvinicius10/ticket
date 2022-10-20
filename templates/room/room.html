@@ -1,0 +1,71 @@
+{% extends 'partials/base.html' %}
+
+{% block title %}{{ room.name }}{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col mt-4">
+            <h2>{{room.name}}</h2>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <p>Username</p>
+            <p>The message lorem ipsum dolor sit amet.</p>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <form method="post">
+        <input type="text" name="content" placeholder="Your message" id="chat-message-input">
+        <button>Submit</button>
+    </form>
+</div>
+{%endblock %}
+{% block scripts%}
+{{ room.slug|json_script:"json-roomname"}}
+{{request.user.username|json_script:"json-username"}}
+<script>
+    const roomName = JSON.parse(document.getElementById('json-roomname').textContent);
+    const userName = JSON.parse(document.getElementById('json-username').textContent);
+    const chatSocket = new WebSocket(
+        'ws://'
+        + window.location.host
+        +'/ws/'
+        + roomName
+        + '/'
+    );
+
+    chatSocket.onmessage = function(e){
+        console.log('onmessage')
+
+        const data = JSON.parse(e.data);
+
+        if (data.message){
+
+        }else{
+            
+        }
+    }
+
+    chatSocket.onclose = function(e){
+        console.log('onclose')
+    }
+
+    document.querySelector('#chat-message-submit').onclick = function(e){
+        const messageInputDom = document.querySelector('#chat-message-input');
+        const message = messageInputDom.value;
+
+        chatSocket.send(JSON.stringify({
+            'message': message,
+            'username': userName,
+            'room': roomName
+        }));
+
+        messageInputDom.value = '';
+    }
+
+</script>
+{%endblock%}

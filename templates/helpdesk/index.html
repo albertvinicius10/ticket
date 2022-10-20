@@ -26,32 +26,40 @@
         </div>
         <div class="col-md-4 mt-4">
             <div class="card">
-                <div class="card-body text-center bg-success">
-                    <h4>Fazendo</h4>
-                </div>
+                <a href="{% url 'fazendo' %}" id="fz">
+                    <div class="card-body text-center bg-success">
+                        <h4>Fazendo</h4>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-4 mt-4">
             <div class="card">
-                <div class="card-body text-center bg-warning">
-                    <h4>Expirados</h4>
-                </div>
+                <a href="{% url 'expirado' %}" id="ex">
+                    <div class="card-body text-center bg-warning">
+                        <h4>Expirados</h4>
+                    </div>
+                </a>
             </div>
         </div>
         <div class="col-md-4 mt-4">
             <div class="card">
-                <div class="card-body text-center bg-danger">
-                    <h4>Pausado</h4>
-                </div>
+                <a href="{% url 'pausado' %}" id="pa">
+                    <div class="card-body text-center bg-danger">
+                        <h4>Pausado</h4>
+                    </div>
+                </a>
             </div>
         </div>
         <div class="col-md-4 mt-4">
             <div class="card">
+                <a href="{% url 'finalizado' %}" id="fi">
                 <div class="card-body text-center bg-secondary">
                     <h4>Finalizado</h4>
                 </div>
+                </a>
             </div>
         </div>
     </div>
