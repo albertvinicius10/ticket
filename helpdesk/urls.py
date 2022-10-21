@@ -9,8 +9,6 @@ urlpatterns = [
     path('finalizado/', views.finalizado, name='finalizado'),
     path('pausado/', views.pausado, name='pausado'),
     path('expirado/', views.expirado, name='expirado'),
-    path('rooms/', views.rooms, name='rooms'),
-    path('<slug:slug>/', views.room, name='room'),
 
     
 ]

@@ -42,6 +42,3 @@ class Ticket(models.Model):
     def __str__(self):
         return f'{self.titulo} ordered by {self.staff}'
     
-class Room(models.Model):
-    name = models.CharField(max_length=255)
-    slug = models.SlugField(unique=True)

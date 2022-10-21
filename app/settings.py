@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from telnetlib import LOGOUT
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,7 +42,7 @@ INSTALLED_APPS = [
     'helpdesk',
     'crispy_forms',
     'user',
-    
+    'mychatapp'
 ]
 
 MIDDLEWARE = [
@@ -74,13 +75,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'app.wsgi.application'
 ASGI_APPLICATION = 'app.asgi.application'
-
-
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer'
-    }
-}
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
