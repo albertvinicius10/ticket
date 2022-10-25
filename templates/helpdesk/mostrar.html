@@ -1,0 +1,10 @@
+{% extends 'partials/base.html' %}
+
+{% block title %}Lista de Tarefas{% endblock %}
+
+{% block content %}
+<div class="offset-1 col-10 list-div">
+    <h1>{{tickets.titulo}}</h1>
+    <p>{{tickets.descricao}}</p>
+</div>
+{% endblock %}

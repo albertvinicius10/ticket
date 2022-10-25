@@ -64,3 +64,11 @@ def pausado(request):
         'tickets': tickets,
     }
     return render(request, 'helpdesk/finalizado.html', context)
+
+@login_required()
+def mostrar(request, id):
+    tickets = Ticket.objects.get(pk=id)
+    context = {
+        'tickets': tickets,
+    }
+    return render(request, 'helpdesk/mostrar.html', context)

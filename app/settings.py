@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'helpdesk',
     'crispy_forms',
     'user',
-    'mychatapp'
 ]
 
 MIDDLEWARE = [
