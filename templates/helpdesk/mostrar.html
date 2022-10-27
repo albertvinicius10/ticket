@@ -1,10 +1,77 @@
 {% extends 'partials/base.html' %}
 
 {% block title %}Lista de Tarefas{% endblock %}
-
+{% load crispy_forms_tags %}
 {% block content %}
-<div class="offset-1 col-10 list-div">
-    <h1>{{tickets.titulo}}</h1>
-    <p>{{tickets.descricao}}</p>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col">
+            <table class="table bg-withe mt-4 table-striped">
+                <thead class="bg-info text-white">
+                    <tr class="text-white">
+                        <td>Titulo</td>
+                        <td>Prioridade</td>
+                        <td>Descrição</td>
+                        <td>Created at</td>
+                        <td>Updated at</td>
+                        <td>User</td>
+                        <td>Status</td>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{tickets.titulo}}</td>
+                        <td>{{tickets.prioridade}}</td>
+                        <td>{{tickets.descricao}}</td>
+                        <td>{{tickets.created_at}}</td>
+                        <td>{{tickets.updated_at}}</td>
+                        <td>{{tickets.staff}}</td>
+                        <td>{{tickets.status}}</td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="container border-0"  id="form">
+    <div class="row">
+        <div class="col" style="overflow-y: scroll; width: 640px; height: 500px;" id="demo">
+            
+            {% for comment in comments%}
+            {% if comment.user_from == staff %}
+            <div class="alert alert-info" role="alert">
+                <h5>{{comment.staff}}:</h5>
+                    <br>
+                    {{comment.comentario}}
+            </div>
+            {% else %}
+            <div class="alert alert-danger" role="alert">
+                <span>{{comment.staff}}:</span>
+                    <br>
+                    {{comment.comentario}}
+                </div>
+            {% endif %}
+                    
+            
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        var objDiv = document.getElementById("demo");
+        objDiv.scrollTop = objDiv.scrollHeight;
+    </script>
+</div>
+<div class="container"  id="form">
+    <div class="row">
+        <div class="col">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input class="btn btn-success btn-block form-control form-control-sm" type="submit" width: 20px; value="Enviar">
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}

@@ -2,8 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages 
-from .models import Ticket
-from .forms import TicketForm
+from .models import Ticket, Comment
+from .forms import TicketForm, CommentForm
+import requests
+import json
+import urllib3
 # Create your views here.
 @login_required()
 def index(request):
@@ -68,7 +71,40 @@ def pausado(request):
 @login_required()
 def mostrar(request, id):
     tickets = Ticket.objects.get(pk=id)
+    comments = Comment.objects.all()
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.staff = request.user
+            instance.save()
+            return redirect('mostrar',id=id)
+    else:
+        form = CommentForm()
     context = {
         'tickets': tickets,
+        'comments': comments,
+        'form': form,
     }
     return render(request, 'helpdesk/mostrar.html', context)
+
+def teste(request):
+    
+    headers = requests.utils.default_headers()
+
+    headers.update(
+        {
+            'User-Agent': 'My User Agent 1.0',
+            'X-CRE44M': 'APP'
+        }
+    )
+
+    data = {
+        'usu_login': '02323384260',
+        'usu_senha': '1q2w3e',
+        'usu_permissao': 'ticket',
+    }
+
+    response = requests.post('https://intra.crea-am.org.br/api/login?log',data,headers=headers,verify=False).json()
+    print(response)
+    return render(request, "teste.html", {'response': response})

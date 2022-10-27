@@ -33,3 +33,7 @@ footer p a {
 .fas.fa-trash{
     color: #db1e47;
 }
+
+.form {
+	height: 50px;
+}

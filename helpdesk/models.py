@@ -42,3 +42,11 @@ class Ticket(models.Model):
     def __str__(self):
         return f'{self.titulo} ordered by {self.staff}'
     
+
+class Comment(models.Model):
+    staff = models.ForeignKey(User, on_delete=models.CASCADE)
+    comentario = models.TextField()
+    image = models.ImageField(upload_to='comments',null=True,blank=True)
+
+    class Meta:
+        verbose_name_plural = 'comment'
