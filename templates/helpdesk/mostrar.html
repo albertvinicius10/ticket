@@ -35,7 +35,7 @@
         </div>
     </div>
 </div>
-<div class="container border-0"  id="form">
+<div class="container border-0"  id="setTime">
     <div class="row">
         <div class="col" style="overflow-y: scroll; width: 640px; height: 500px;" id="demo">
             
@@ -63,14 +63,16 @@
         objDiv.scrollTop = objDiv.scrollHeight;
     </script>
 </div>
-<div class="container"  id="form">
+<div class="container"  id="area">
     <div class="row">
         <div class="col">
-            <form method="POST">
-                {% csrf_token %}
-                {{ form|crispy }}
-                <input class="btn btn-success btn-block form-control form-control-sm" type="submit" width: 20px; value="Enviar">
-            </form>
+            <div class="">
+                <form method="POST" id="form">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <input class="btn btn-success btn-block" type="submit" value="Enviar">
+                </form>
+            </div>
         </div>
     </div>
 </div>

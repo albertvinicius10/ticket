@@ -6,7 +6,7 @@ from .models import Ticket, Comment
 from .forms import TicketForm, CommentForm
 import requests
 import json
-import urllib3
+
 # Create your views here.
 @login_required()
 def index(request):
@@ -29,6 +29,10 @@ def add(request):
 @login_required()
 def ticket(request):
     tickets= Ticket.objects.all()
+    if request.user.is_superuser:
+        tickets = Ticket.objects.all()
+    else:
+        tickets = Ticket.objects.filter(staff=request.user)
     #tickets= Ticket.objects.filter(staff=request.user)
     context = {
         'tickets': tickets,
@@ -39,6 +43,11 @@ def ticket(request):
 @login_required()
 def fazendo(request):
     tickets = Ticket.objects.filter(status='Fazendo')
+    tickets= Ticket.objects.all()
+    if request.user.is_superuser:
+        tickets = Ticket.objects.all().filter(status='Fazendo')
+    else:
+        tickets = Ticket.objects.filter(staff=request.user, status='Fazendo')
     context = {
         'tickets': tickets,
     }
@@ -47,6 +56,10 @@ def fazendo(request):
 @login_required()
 def finalizado(request):
     tickets = Ticket.objects.filter(status='Feito')
+    if request.user.is_superuser:
+        tickets = Ticket.objects.all().filter(status='Feito')
+    else:
+        tickets = Ticket.objects.filter(staff=request.user, status='Feito')
     context = {
         'tickets': tickets,
     }
@@ -55,6 +68,10 @@ def finalizado(request):
 @login_required()
 def expirado(request):
     tickets = Ticket.objects.filter(status='Expirado')
+    if request.user.is_superuser:
+        tickets = Ticket.objects.all().filter(status='Expirado')
+    else:
+        tickets = Ticket.objects.filter(staff=request.user, status='Expirado')
     context = {
         'tickets': tickets,
     }
@@ -63,6 +80,10 @@ def expirado(request):
 @login_required()
 def pausado(request):
     tickets = Ticket.objects.filter(status='Pausado')
+    if request.user.is_superuser:
+        tickets = Ticket.objects.all().filter(status='Pausado')
+    else:
+        tickets = Ticket.objects.filter(staff=request.user, status='Pausado')
     context = {
         'tickets': tickets,
     }
