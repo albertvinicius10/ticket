@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.contrib import messages 
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, get_user_model
 from .models import Ticket, Comment
-from .forms import TicketForm, CommentForm
+from .forms import TicketForm, CommentForm, TesteForm
+from django.contrib.auth.forms import AuthenticationForm
 import requests
 import json
 
@@ -119,13 +121,44 @@ def teste(request):
             'X-CRE44M': 'APP'
         }
     )
+    if request.method == 'POST':
+        form = TesteForm(request.POST)
+        if form.is_valid():
+            print('hi')
+            form.save()
+            print(form.cleaned_data)
+            usuario = request.POST.get('usuario','')
+            senha = request.POST.get('senha','')
+            print(usuario)
+            data = {
+                'usu_login': usuario,
+                'usu_senha': senha,
+                'usu_permissao': 'ticket',
+            }
+        response = requests.post('https://intra.crea-am.org.br/api/login?log',data,headers=headers,verify=False).json()
+        user = authenticate(request, username=usuario, password=senha)
+        print(response)
+        UserModel = get_user_model()
+        if response['status'] == '200':
+            if not UserModel.objects.filter(username=usuario).exists():
+                user=UserModel.objects.create_user(username=usuario, password=senha)
+                user.save()
+                login(request, user)
+                return redirect('index')
+            else:
+                login(request, user)
+                return redirect('index')
+       
+    
+    
+    else:
+        form = TesteForm()
 
-    data = {
-        'usu_login': '02323384260',
-        'usu_senha': '1q2w3e',
-        'usu_permissao': 'ticket',
-    }
+    
+    #senha 1q2w3e
 
-    response = requests.post('https://intra.crea-am.org.br/api/login?log',data,headers=headers,verify=False).json()
-    print(response)
-    return render(request, "teste.html", {'response': response})
+
+    
+    
+    return render(request, "teste.html", {'form': form})
+

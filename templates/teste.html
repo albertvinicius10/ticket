@@ -1,3 +1,4 @@
+{% load crispy_forms_tags %}
 {%block content%}
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +10,20 @@
 </head>
 <body>
     
-    <h1>{{response}}</h1>
+    <h1>Login</h1>
+    <div class="container"  id="area">
+        <div class="row">
+            <div class="col">
+                <div class="">
+                    <form method="POST" id="form">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <input class="btn btn-success btn-block" type="submit" value="Enviar">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     
 </body>
 </html>

@@ -21,7 +21,7 @@
                         {% csrf_token%}
                         {{ form|crispy}}
                         <input class="btn btn-success" type="submit" value="Login">
-                        <a class="btn btn-primary" href="{% url 'index' %}">Registre-se</a>
+                        <a class="btn btn-primary" href="{% url 'user-register' %}">Registre-se</a>
                     </form>
                 </div>
             </div>

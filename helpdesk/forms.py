@@ -1,5 +1,5 @@
 from django import forms
-from .models import Ticket, Comment
+from .models import Ticket, Comment, Teste
 
 
 class TicketForm(forms.ModelForm):
@@ -11,3 +11,8 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['comentario', 'image']
+    
+class TesteForm(forms.ModelForm):
+    class Meta:
+        model = Teste
+        fields = ['usuario', 'senha']

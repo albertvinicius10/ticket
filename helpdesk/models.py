@@ -50,3 +50,7 @@ class Comment(models.Model):
 
     class Meta:
         verbose_name_plural = 'comment'
+
+class Teste(models.Model):
+    usuario = models.CharField(max_length=100, null=False)
+    senha = models.CharField(max_length=50, null=False)
