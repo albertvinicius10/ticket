@@ -16,3 +16,8 @@ class TesteForm(forms.ModelForm):
     class Meta:
         model = Teste
         fields = ['usuario', 'senha']
+
+        widgets = {
+            # telling Django your password field in the mode is a password input on the template
+            'senha': forms.PasswordInput() 
+        }

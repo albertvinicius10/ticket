@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'helpdesk',
     'crispy_forms',
     'user',
+    'chat',
 ]
 
 MIDDLEWARE = [
@@ -75,6 +76,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'app.wsgi.application'
 ASGI_APPLICATION = 'app.asgi.application'
 
+
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -83,6 +85,13 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+}
+
+
+CHANNEL_LAYERS = {
+	"default": {
+		"BACKEND": "channels.layers.InMemoryChannelLayer"
+	}
 }
 
 
@@ -136,6 +145,6 @@ MEDIA_ROOT = (BASE_DIR/ 'media')
 MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = 'index'
-LOGOUT_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = 'user-login'
 
 LOGIN_URL = 'user-login'

@@ -24,6 +24,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('helpdesk.urls')),
+    path('chat/',include('chat.urls')),
     path('register/',user_view.register, name='user-register'),
     path('profile/',user_view.profile, name='user-profile'),
     path('profile/update/',user_view.profile_update, name='user-profile-update'),

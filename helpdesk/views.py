@@ -94,22 +94,10 @@ def pausado(request):
 @login_required()
 def mostrar(request, id):
     tickets = Ticket.objects.get(pk=id)
-    comments = Comment.objects.all()
-    if request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.staff = request.user
-            instance.save()
-            return redirect('mostrar',id=id)
-    else:
-        form = CommentForm()
     context = {
-        'tickets': tickets,
-        'comments': comments,
-        'form': form,
+        'id': id
     }
-    return render(request, 'helpdesk/mostrar.html', context)
+    return render(request, 'chat/chatPage.html', context)
 
 def teste(request):
     
@@ -125,7 +113,7 @@ def teste(request):
         form = TesteForm(request.POST)
         if form.is_valid():
             print('hi')
-            form.save()
+            form.save(commit=False)
             print(form.cleaned_data)
             usuario = request.POST.get('usuario','')
             senha = request.POST.get('senha','')
@@ -136,18 +124,20 @@ def teste(request):
                 'usu_permissao': 'ticket',
             }
         response = requests.post('https://intra.crea-am.org.br/api/login?log',data,headers=headers,verify=False).json()
-        user = authenticate(request, username=usuario, password=senha)
-        print(response)
+        user = authenticate(request, username=response['dados']['usu_nome'], password=senha)
+        print(response['dados'])
         UserModel = get_user_model()
         if response['status'] == '200':
-            if not UserModel.objects.filter(username=usuario).exists():
-                user=UserModel.objects.create_user(username=usuario, password=senha)
+            if not UserModel.objects.filter(username=response['dados']['usu_nome']).exists():
+                user=UserModel.objects.create_user(username=response['dados']['usu_nome'], password=senha)
                 user.save()
                 login(request, user)
                 return redirect('index')
             else:
                 login(request, user)
                 return redirect('index')
+        else:
+            return redirect('teste')
        
     
     
